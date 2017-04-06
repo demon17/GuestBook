@@ -47,16 +47,5 @@ class Error {
         }
     }
 
-    public static function isLogged() {
-        session_start();
-        if(isset($_SESSION['user_id'])) {
-            self::$logged = "header1.html";
-            $results = $_SESSION['username'];
-            return $results;
-        }
-        else {
-            self::$logged = "header2.html";
-        }
-    }
 }
 ?>

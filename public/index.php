@@ -24,14 +24,6 @@ $router = new Core\Router();
 
 //Add the routes
 $router->add('',['controller' => 'Home', 'action' => 'index']);
-$router->add('about',['controller' => 'Home', 'action' => 'about']);
-$router->add('contact',['controller' => 'Home', 'action' => 'contact']);
-$router->add('create',['controller' => 'Home', 'action' => 'create']);
-$router->add('login',['controller' => 'Login', 'action' => 'index']);
-$router->add('news',['controller' => 'News', 'action' => 'index']);
-$router->add('shownews/meteo',['controller' => 'Home', 'action' => 'meteo']);
-$router->add('shownews/curs',['controller' => 'Home', 'action' => 'curs']);
-$router->add('shownews/{id:[a-zA-Z0-9_-]+}',['controller' => 'News', 'action' => 'display']);
 $router->add('{controller}/{action}');
 
 $router->dispatch($_SERVER['QUERY_STRING']);
