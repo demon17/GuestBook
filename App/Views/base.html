@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="SimpleFormsApp">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet"type="text/css" href="css/styles.css">
+    <title>Guest book</title>
+</head>
+<body ng-controller="RegistrationController as reg">
+<h1>Guest book</h1>
+
+{% verbatim %}
+<fieldset>
+    <legend>Message</legend>
+    <form name='regForm' novalidate action="#">
+
+        <input type="text" name="username" placeholder="Pick a username"
+               ng-model="reg.user.username"
+               required
+               minlength="2">
+        {{ reg.user.username }}
+        <span
+                ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched">
+            Username must be at least 4 characters long
+          </span>
+        <br>
+
+        <input type="email" name="email" placeholder="Email"
+               ng-model="reg.user.email"
+               required>
+        {{ reg.user.email }}
+        <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+            Must be a valid email address: handle@domain format
+          </span>
+        <br>
+
+        <textarea type="text" name="message" placeholder="Pick a message"
+                  ng-model="reg.user.message"
+                  required
+                  minlength="5"></textarea>
+        {{ reg.user.message }}
+        <span
+                ng-if="(regForm.message.$error.minlength || regForm.message.$error.required) && regForm.message.$touched">
+            Message must be at least 4 characters long
+          </span>
+        <br>
+
+        <button
+                ng-disabled="regForm.$invalid"
+                ng-click="reg.submit()">Submit</button>
+
+        <div style="margin-top: 10px;">
+            Form valid? {{ regForm.$valid }}
+        </div>
+    </form>
+</fieldset>
+
+<div id="info" ng-if="reg.completed">
+    Username: {{ reg.user.username}} <br>
+    Email: {{ reg.user.email}} <br>
+    Message: {{ reg.user.message }}
+</div>
+{% endverbatim %}
+{% for guest in guestBook %}
+Id: {{ guest.id}}<br>
+Username: {{ guest.username}} <br>
+Email: {{ guest.email}} <br>
+Message: {{ guest.message}} <br><br>
+{% endfor %}
+
+{% block body %}
+{% endblock %}
+<script src="lib/angular.min.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
